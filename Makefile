@@ -1,7 +1,8 @@
 System := $(shell uname)
 
 all:
-	gcc -m32 demo/demo1.c simple/coroutine.c -o demo1.out
+	nasm -f elf uthread/switch.s -o uthread/switch.o
+	gcc -m32 uthread/test.c uthread/uthread.c uthread/switch.o -o demo1.out
 
 asm:
 	gcc -m32 -S -fno-stack-protector coroutine.c
