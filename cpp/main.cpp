@@ -178,7 +178,7 @@ public:
         return this->threads.size() > 0;
     }
 
-    void spawn(std::function<void()> const &f)
+    void spawn(std::function<void()> &f)
     {
         Thread *available = nullptr;
         for (size_t i = 0; i < this->threads.size(); i++)
@@ -193,14 +193,19 @@ public:
         {
             throw runtime_error("no available thread.");
         }
-        size_t size = available->stack.size();
-        uint64_t *s_ptr = (uint64_t *)&(available->stack) + size;
-        s_ptr -= 16;
-        *s_ptr = (uint64_t)guard;
-        s_ptr -= 8;
-        *s_ptr = (uint64_t)skip;
-        s_ptr -= 8;
-        *s_ptr = (uint64_t)&f;
+        // size_t size = available->stack.size();
+        uint64_t *s_ptr = (uint64_t *)&(available->stack);
+        // s_ptr += (size / 64);
+        // s_ptr++;
+
+        void (*pguard)() = guard;
+        void (*gskip)() = skip;
+        // void (*gf)() = f;
+        *s_ptr = (uint64_t)(pguard);
+        s_ptr++;
+        *s_ptr = (uint64_t)(gskip);
+        // s_ptr++;
+        // *s_ptr = (uint64_t)&f;
         available->ctx.rsp = (uint64_t)s_ptr;
         available->state = State::Ready;
     }
