@@ -12,6 +12,12 @@
 
 3. 利用 setjmp 和 longjmp 来实现，了解即可。
 
+## 实现
+
+rust 抽象能力好，易阅读和理解，见[rust协程](./rust/main.rs)；在线运行可使用：https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018。
+
+
+
 ## 文档
 
 * [asm 内联汇编使用](./docs/asm.md)
