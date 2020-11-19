@@ -77,7 +77,7 @@ void t_switch(ThreadContext *old_t, ThreadContext *new_t)
         "movq     32(%1), %%r12\n\t"
         "movq     40(%1), %%rbx\n\t"
         "movq     48(%1), %%rbp\n\t"
-        "ret\n\t"
+        "retq\n\t"
         :
         : "r"(old_t), "r"(new_t)
         :);
