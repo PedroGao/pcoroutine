@@ -28,3 +28,4 @@ rust 抽象能力好，易阅读和理解，见[rust协程](./rust/main.rs)；�
 * ucontext 协程：https://www.jianshu.com/p/a96b31da3ab0；https://blog.csdn.net/qq910894904/article/details/41911175
 * 有栈和无栈协程之间的区别：https://blog.csdn.net/weixin_43705457/article/details/106924435。
 * 黑科技无栈协程的实现：https://mthli.xyz/coroutines-in-c/。
+* 深度协程好文：https://sf-zhou.github.io/programming/cpp_magic_coroutine.html。

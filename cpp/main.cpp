@@ -174,8 +174,11 @@ public:
         }
         size_t size = available->stack.size();
         // 注意：此处必须是 vector 的第一个元素的地址，vector 有其它的成员变量
-        uint8_t *s_ptr = (uint8_t *)&(available->stack[0]);
-        s_ptr += size;
+        // uint8_t *s_ptr = (uint8_t *)&(available->stack[0]);
+        // s_ptr += size;
+        uintptr_t back = (uintptr_t)(&available->stack.back());
+        uintptr_t back_alighed = back & ~15ull;
+        uint8_t *s_ptr = (uint8_t *)(back_alighed) - sizeof(void *);
         void (*pguard)() = guard;
         void (*gskip)() = skip;
         uint64_t vguard = (uint64_t)(pguard);
