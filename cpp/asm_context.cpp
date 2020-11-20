@@ -34,9 +34,15 @@ void t_switch(ThreadContext *old_t, ThreadContext *new_t)
         "movq     32(%1), %%r12\n\t"
         "movq     40(%1), %%rbx\n\t"
         "movq     48(%1), %%rbp\n\t"
+        "jmpq %%rsp\n\t"
         :
         : "r"(old_t), "r"(new_t)
         :);
+}
+
+void hello()
+{
+    printf("Hello Guys, I'am called!\n");
 }
 
 int main(int argc, char const *argv[])
@@ -46,14 +52,14 @@ int main(int argc, char const *argv[])
     // 56 字节，每一个 8 字节，总 7 个
     printf("c1 size: %ld\n", sizeof(c1));
     printf("c2 size: %ld\n", sizeof(c2));
-    // c1.rsp = 123;
-    c2.r15 = 321;
-    // t_switch(&c1, &c2);
     uint64_t *c1_ptr = (uint64_t *)(&c1);
-    *c1_ptr = 1;
+    void (*p_hello)() = hello;
+    *c1_ptr = (uint64_t)p_hello;
     *(++c1_ptr) = 2;
     *(++c1_ptr) = 3;
     *(++c1_ptr) = 4;
+    // 交换上下文，会执行 hello
+    t_switch(&c2, &c1);
     printf("c1 r15: %ld\n", c1.r15);
     printf("c1 rsp: %ld\n", c1.rsp);
     printf("c1 15: %ld\n", c1.r15);

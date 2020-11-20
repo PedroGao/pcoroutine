@@ -16,8 +16,6 @@
 
 rust 抽象能力好，易阅读和理解，见[rust协程](./rust/main.rs)；在线运行可使用：https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018。
 
-
-
 ## 文档
 
 * [asm 内联汇编使用](./docs/asm.md)
@@ -28,3 +26,5 @@ rust 抽象能力好，易阅读和理解，见[rust协程](./rust/main.rs)；�
 * 嵌入汇编：https://cloud.tencent.com/developer/article/1434865。
 * GCC内联汇编：https://www.jianshu.com/p/1782e14a0766
 * ucontext 协程：https://www.jianshu.com/p/a96b31da3ab0；https://blog.csdn.net/qq910894904/article/details/41911175
+* 有栈和无栈协程之间的区别：https://blog.csdn.net/weixin_43705457/article/details/106924435。
+* 黑科技无栈协程的实现：https://mthli.xyz/coroutines-in-c/。
